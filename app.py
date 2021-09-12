@@ -6,22 +6,23 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 BASE_ENDPOINT = "https://api-v3.mbta.com/"
-SCHEDULES_ARGS = "schedules?include=route,trip,stop&filter[stop]=place-north&sort=departure_time&page[limit]=10"
+SCHEDULES_ARGS = "predictions?filter[stop]=place-north&sort=-departure_time&filter[route_type]=0,1,2"
 ALERTS_ARGS = "alerts?filter[stop]=place-north&page[limit]=5"
 
 def get_departures():
     response = requests.get(BASE_ENDPOINT + SCHEDULES_ARGS)
 
     departures = []
-    for schedule in response.json()["data"]:
-        departure_time = schedule['attributes']['departure_time']
-        departure_time = departure_time[11:16]
-        departures.append({
-            "Line": schedule['relationships']['route']['data']['id'],
-            "DepartureTime": departure_time
-        })
+    for prediction in response.json()["data"]:
+        departure_time = prediction['attributes']['departure_time']
+        if departure_time:
+            departure_time = departure_time[11:16]
+            departures.append({
+                "Line": prediction['relationships']['route']['data']['id'],
+                "DepartureTime": departure_time
+            })
 
-    return departures
+    return departures[::-1]
 
 def get_alerts():
     response = requests.get(BASE_ENDPOINT + ALERTS_ARGS)
