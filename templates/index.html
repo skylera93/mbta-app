@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} North Station Information {% endblock %}</h1>
+    <table border-spacing=30px>
+        <tr>
+            <th>Line</th>
+            <th>Arrival Time</th>
+        </tr>
+        {% for route in routes %}
+        <tr>
+            <td>{{ route['relationships']['route']['data']['id'] }}</td>
+            <td>{{ route['attributes']['arrival_time'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
