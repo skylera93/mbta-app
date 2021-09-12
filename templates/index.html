@@ -2,16 +2,24 @@
 
 {% block content %}
     <h1>{% block title %} North Station Information {% endblock %}</h1>
+    <h2>Departures</h2>
     <table border-spacing=30px>
         <tr>
             <th>Line</th>
-            <th>Arrival Time</th>
+            <th>Departure Time</th>
         </tr>
-        {% for route in routes %}
+        {% for departure in departures %}
         <tr>
-            <td>{{ route['relationships']['route']['data']['id'] }}</td>
-            <td>{{ route['attributes']['arrival_time'] }}</td>
+            <td>{{ departure['Line'] }}</td>
+            <td>{{ departure['DepartureTime'] }}</td>
         </tr>
         {% endfor %}
+    </table>
+    <h2>Alerts:</h2>
+        <ul>
+            {% for alert in alerts %}
+            <li>{{ alert['Message'] }}</li>
+            {% endfor %}
+        </ul>
     </table>
 {% endblock %}
