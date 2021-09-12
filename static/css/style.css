@@ -1,6 +1,32 @@
-h1 {
-    border: 2px #eee solid;
-    color: brown;
-    text-align: center;
-    padding: 10px;
+body {
+    color: #222;
+    background: #000;
+    font: 100% system-ui;
+  }
+
+h1, h2, h3, h4, h5, h6 {
+    color: rgb(238, 255, 143);
 }
+
+table, th, td {
+    border: 1px solid gray;
+  }
+
+th {
+    color:white;
+    height: 50px;
+    text-align: left;
+    padding: 15px;
+}
+
+td {
+    color:rgb(238, 255, 143);
+    text-align: left;
+    height: 30px;
+    padding: 15px;
+    vertical-align: bottom;
+}
+
+  a {
+    color: #0033cc;
+  }
